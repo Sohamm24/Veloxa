@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCn2cAnRWDeVnYizCxrCLg5f1ZB-ExKais",
-  authDomain: "veloxa-1f9a1.firebaseapp.com",
-  projectId: "veloxa-1f9a1",
-  storageBucket: "veloxa-1f9a1.firebasestorage.app",
-  messagingSenderId: "730852093425",
-  appId: "1:730852093425:web:a45ace09f45efc8d4fa850"
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_FIREBASE_APPID,
 };
 
 if (!firebaseConfig.apiKey || !firebaseConfig.authDomain || !firebaseConfig.projectId) {
