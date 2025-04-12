@@ -43,7 +43,8 @@ function App() {
           {/* Protected routes */}
           <Route 
             path="/dashboard" 
-            element={isAuthenticated ? <Dashboard onLogout={handleLogout} /> : <Navigate to="/login" />} 
+            element={<Dashboard/>}
+        //    element={isAuthenticated ? <Dashboard onLogout={handleLogout} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/weather" 
