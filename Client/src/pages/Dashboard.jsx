@@ -6,7 +6,7 @@ import {
   TrendingUp, UserPlus, Users, AlertTriangle 
 } from 'lucide-react';
 
-const Dashboard = ({ onLogout }) => {
+const Dashboard = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,6 +41,7 @@ const Dashboard = ({ onLogout }) => {
     { id: 3, name: "Mountain View Trail", distance: "22.8 km", date: "Apr 8" }
   ];
 
+
   // Simulated weather API fetch
   useEffect(() => {
     const fetchWeather = async () => {
@@ -71,7 +72,7 @@ const Dashboard = ({ onLogout }) => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Navigation sidebar */}
-      <Navigation onLogout={onLogout} />
+      <Navigation/>
 
       {/* Main content */}
       <div className="flex-1 p-4 md:p-8 overflow-y-auto">

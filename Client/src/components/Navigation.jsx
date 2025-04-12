@@ -5,12 +5,13 @@ import Logo from '../assets/Logo.png'
 import { 
   MapPin, Sun, Moon, Menu, X, Home, Cloud, Map, Users, UserPlus, Calendar, User 
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const Navigation = ({ onLogout }) => {
+const Navigation = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -28,6 +29,15 @@ const Navigation = ({ onLogout }) => {
     { path: '/events', name: 'Events', icon: <Calendar size={20} /> },
     { path: '/profile', name: 'Profile', icon: <User size={20} /> },
   ];
+
+  const handleSignOut = async () => {
+    try{
+      localStorage.removeItem('authToken');
+      navigate('/')
+    }catch(error){
+      console.error("Failed to logout:", error)
+    }
+  }
 
   return (
     <>
@@ -71,7 +81,7 @@ const Navigation = ({ onLogout }) => {
                 </Link>
               ))}
               <button
-                onClick={onLogout}
+                onClick={handleSignOut}
                 className="flex items-center p-4 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <span className="mr-3">
@@ -124,7 +134,7 @@ const Navigation = ({ onLogout }) => {
               {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
             </button>
             <button
-              onClick={onLogout}
+              onClick={handleSignOut}
               className="flex items-center w-full p-2 text-red-500 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <span className="mr-3">
