@@ -1,13 +1,18 @@
 
+import { Route ,Routes} from 'react-router-dom'
 import './App.css'
+import CreateRoom from './Components/CreateRoom'
+import Home from './Pages/Home'
+import Room from './Pages/Room'
 
 function App() {
 
   return (
     <>
-    <h3 className="text-3xl font-semibold text-center text-indigo-600 mt-4 mb-2 tracking-wide">
-    Hii
-    </h3>
+    <Routes>
+      <Route path='/' element={<Home/>}/>   
+      <Route path='/room/:id' element={<Room/>}/>
+    </Routes>
     </>
   )
 }
