@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { SocketContext } from "../context/SocketContext"
+import UserFeedPlayer from "../Components/UserFeedPlayer"
 
 const Room: React.FC = () => {
 
     const { id } = useParams()
-    const { socket,user } = useContext(SocketContext)
+    const { socket,user,stream } = useContext(SocketContext)
     const [clients, setClients] = useState<string[]>([]);
 
     const fetchParticpantList = ({roomId , participants}:{roomId:string , participants : string[]}) =>{
@@ -24,8 +25,7 @@ const Room: React.FC = () => {
     return(
         <div>
             <a>Room : {id}</a>
-            <br/>
-            <a>Participants : {clients}</a>
+            <UserFeedPlayer stream={stream}/>
         </div>
     )  
 }

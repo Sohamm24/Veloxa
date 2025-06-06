@@ -21,6 +21,12 @@ interface Props {
     const navigate = useNavigate()
 
     const [user,setUser]= useState<Peer>()
+    const [stream, setStream]=useState<MediaStream>()
+
+    const fetchUserFeed = async () => {
+       const stream =  await navigator.mediaDevices.getUserMedia({video : true , audio : true})
+       setStream(stream)
+    }
 
     useEffect(()=>{
 
@@ -28,6 +34,8 @@ interface Props {
         const newPeer = new Peer(userId)
 
         setUser(newPeer)
+
+        fetchUserFeed()
 
         const enterRoom =({roomId}: {roomId : String}) =>{
             navigate(`/room/${roomId}`)
@@ -38,7 +46,7 @@ interface Props {
     },[])
 
     return(
-        <SocketContext.Provider value ={{ socket,user }}>
+        <SocketContext.Provider value ={{ socket,user,stream }}>
         {children}
         </SocketContext.Provider>
     )
