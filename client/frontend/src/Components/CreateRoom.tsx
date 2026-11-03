@@ -1,24 +1,29 @@
-import React from "react"
-import { Socket } from "socket.io-client"
-import { useContext } from "react"
-import { SocketContext } from "../context/SocketContext"
+import React, { useContext } from "react";
+import { Video } from "lucide-react";
+import { SocketContext } from "../context/SocketContext";
 
-const CreateRoom : React.FC = () => {
+interface CreateRoomProps {
+  className?: string;
+}
 
-    const { socket } = useContext(SocketContext)
+const CreateRoom: React.FC<CreateRoomProps> = ({ className = "" }) => {
+  const socketContext = useContext(SocketContext);
 
-    const initRoom = () => {
-        console.log("Initializing a req to create a room")
-        socket.emit("create-room")
+  const initRoom = () => {
+    if (socketContext?.createRoom) {
+      socketContext.createRoom();
     }
+  };
 
-    return (
-        <button onClick={initRoom}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-        >
-           Start a new meeting in a new room
-        </button>
-    )
-} 
+  return (
+    <button
+      onClick={initRoom}
+      className={`inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-medium px-4 py-2.5 rounded-xl text-sm transition-colors duration-150 ${className}`}
+    >
+      <Video className="w-4 h-4 text-emerald-200" />
+      <span>New Meeting</span>
+    </button>
+  );
+};
 
-export default CreateRoom
+export default CreateRoom;
